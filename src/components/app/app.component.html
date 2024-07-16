@@ -1,0 +1,6 @@
+<p class="dark-mode-switch" [ngClass]="{ dark: isDarkMode }">
+  <mat-slide-toggle [checked]="isDarkMode" (click)="onToggleDarkMode()">
+    Dark Mode
+  </mat-slide-toggle>
+</p>
+<app-table></app-table>

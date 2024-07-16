@@ -1,0 +1,10 @@
+.dark-mode-switch {
+  ::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled+.mdc-label {
+    color: rgb(14, 15, 26);
+  }
+    &.dark {
+      ::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled+.mdc-label {
+        color: rgb(198, 210, 219);
+      }
+    }
+}

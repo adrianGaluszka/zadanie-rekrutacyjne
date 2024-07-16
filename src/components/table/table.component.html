@@ -1,0 +1,63 @@
+<table cellspacing="0" cellpadding="0" [ngClass]="{ dark: darkMode }">
+  <thead>
+    <tr>
+      @for (header of headers; track header) {
+      <th>{{ header }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let group of $data | async">
+      <tr>
+        <td>
+          <mat-icon
+            class="expand-icon"
+            [ngClass]="{ open: group.isExpanded }"
+            (click)="group.isExpanded = !group.isExpanded"
+          >
+            keyboard_arrow_up
+          </mat-icon>
+          {{ group.symbol }}
+          {{ group.items.length }}
+        </td>
+        <td></td>
+        <td></td>
+        <td>{{ group.size | number : "1.3-3" }}</td>
+        <td></td>
+        <td>{{ group.openPrice | number : "1.3-3" }}</td>
+        <td>{{ group.swap | number : "1.4-4" }}</td>
+        <td [ngClass]="group.profit < 0 ? 'red' : 'green'">
+          {{ group.profit | number : "1.4-4" }}
+        </td>
+        <td><button (click)="onRemoveItems(group.items)">X</button></td>
+      </tr>
+      @for (item of group.items; track item.id) {
+      <tr [ngClass]="{ hidden: !group.isExpanded }">
+        <td></td>
+        <td>
+          {{ item.id }}
+        </td>
+        <td>
+          {{ item.side }}
+        </td>
+        <td>
+          {{ item.size | number : "1.3-3" }}
+        </td>
+        <td>
+          {{ item.openTime | date : "dd LL yyy HH:mm:ss" }}
+        </td>
+        <td>
+          {{ item.openPrice | number : "1.3-3" }}
+        </td>
+        <td>
+          {{ item.swap | number : "1.4-4" }}
+        </td>
+        <td [ngClass]="item.profit < 0 ? 'red' : 'green'">
+          {{ item.profit | number : "1.3-3" }}
+        </td>
+        <td><button (click)="onRemoveItems([item])">X</button></td>
+      </tr>
+      }
+    </ng-container>
+  </tbody>
+</table>
